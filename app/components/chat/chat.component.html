@@ -1,19 +1,31 @@
-<div>
-    <label>Username: </label>
-    <input type="text" [(ngModel)]="username" name="username">
-    <br>
-    <button (click)="setUsername()">Submit</button>
+<div class="ui top inverted fixed menu">
+    <a class="item">Chat App</a>
 </div>
 
-<div *ngIf="username">
-    <input type="text" placeholder="Enter Message..." [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()">
-    <br>
-
-    <div *ngFor="let message of messages">
-        <strong>{{message.username}}: </strong> {{message.text}}
+<div class="ui container">
+    <div class="ui center aligned basic segment">
+        <div class="ui left action input">
+            <div class="ui right labeled input">
+                <div class="ui blue label">Username</div>
+                <input type="text" [(ngModel)]="username" name="username">
+                <button (click)="setUsername()" class="ui button label">Submit</button>
+            </div>
+        </div>
+        <br>
+        <div class="ui horizontal divider">
+            Socket.io chat
+        </div>
+        <div *ngIf="username">
+            <div class="ui input focus">
+                <input type="text" placeholder="Enter Message..." [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()">
+            </div>
+            <br>
+            <div *ngFor="let message of messages" class="ui floating message">
+                <strong>{{message.username}}: </strong> {{message.text}}
+            </div>
+        </div>
+        <div *ngIf="!username">
+            Please Log Into the Chat
+        </div>
     </div>
-</div>
-
-<div *ngIf="!username">
-    Please Log In To Chat
 </div>
